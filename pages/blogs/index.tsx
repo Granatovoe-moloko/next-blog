@@ -8,6 +8,8 @@ type blogsProps = {
 };
 
 export const getStaticProps:GetStaticProps = async () => {
+    try {
+
         const response = await fetch('https://6401ebf1ab6b7399d0af8f00.mockapi.io/items');
         const data = await response.json();
 
@@ -20,6 +22,12 @@ export const getStaticProps:GetStaticProps = async () => {
         return {
             props: {blogs: data}
         }
+    }
+    catch {
+        return {
+            props: {blogs: null},
+        }
+    }
 }
 
 const Blogs:FC<blogsProps> = ({blogs}) => {
